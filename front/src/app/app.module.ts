@@ -12,6 +12,8 @@ import { EventService } from './demo/service/event.service';
 import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
+import { AuthService } from './main/middleware/auth/auth.service';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     declarations: [
@@ -24,7 +26,7 @@ import { PhotoService } from './demo/service/photo.service';
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, PetService
+        PhotoService, ProductService, PetService, AuthService, MessageService
     ],
     bootstrap: [AppComponent]
 })

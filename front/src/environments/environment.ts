@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrl: 'https://super-duper-system-p4v44r9j7ww3qgx-3000.app.github.dev',
+  viaCepUrl: 'https://viacep.com.br/ws'
 };
 
 /*

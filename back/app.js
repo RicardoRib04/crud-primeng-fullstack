@@ -16,13 +16,17 @@ app.use(express.urlencoded({ extended: false }));
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var alunosRouter = require('./routes/alunos');
-var authRouter = require('./routes/auth')
+var authRouter = require('./routes/auth');
+var petRouter = require('./routes/pet');
+var tutorRouter = require('./routes/tutors');
 
 // USANDO ROTAS
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/alunos', alunosRouter);
-app.use('/auth', authRouter)
+app.use('/auth', authRouter);
+app.use('/pets', petRouter);
+app.use('/tutors', tutorRouter);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

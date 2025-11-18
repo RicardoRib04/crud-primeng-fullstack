@@ -28,4 +28,15 @@ db.run(`
         )
 `)
 
+console.log('Tabela pets criada')
+db.run(`
+        CREATE TABLE IF NOT EXISTS pets (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            gender TEXT,
+            color TEXT,
+            breed TEXT
+        )
+`)
+
 module.exports = db

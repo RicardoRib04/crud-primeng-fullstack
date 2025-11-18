@@ -20,5 +20,7 @@ export class AppTopBarComponent {
 
     logout(){
         console.log("saindo")
+        localStorage.removeItem("token")
+        window.location.href = "/"
     }
 }

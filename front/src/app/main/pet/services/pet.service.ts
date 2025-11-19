@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pet } from '../models/pet';
+import {environment} from '../../../../environments/environment'
 
 @Injectable()
 export class PetService {
@@ -10,7 +11,7 @@ export class PetService {
         "Authorization": `Bearer ${localStorage.getItem("token")}`
     });
 
-    baseURL = "https://urban-waffle-r447p95575p3v5-3000.app.github.dev/pets"
+    urlApi = environment.baseUrl+"/pets"
 
     getPetsSmall() {
         return this.http.get<any>('assets/demo/data/products-small.json')
@@ -20,7 +21,7 @@ export class PetService {
     }
 
     getPets() {
-        return this.http.get<any>(this.baseURL, {headers: this.headers})
+        return this.http.get<any>(this.urlApi, {headers: this.headers})
             .toPromise()
             .then(res => {
                 console.log("Pers service", res)

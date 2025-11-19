@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://urban-waffle-r447p95575p3v5-3000.app.github.dev',
+  baseUrl: 'https://studious-barnacle-r4w9j5j5v6qjhrxg-3000.app.github.dev',
   viaCepUrl: 'https://viacep.com.br/ws'
 };
 

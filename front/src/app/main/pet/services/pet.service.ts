@@ -1,10 +1,16 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pet } from '../models/pet';
 
 @Injectable()
 export class PetService {
     constructor(private http: HttpClient) { }
+
+    headers = new HttpHeaders({
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+    });
+
+    baseURL = "https://urban-waffle-r447p95575p3v5-3000.app.github.dev/pets"
 
     getPetsSmall() {
         return this.http.get<any>('assets/demo/data/products-small.json')
@@ -14,13 +20,15 @@ export class PetService {
     }
 
     getPets() {
-        return this.http.get<any>('assets/demo/data/pet.json')
+        return this.http.get<any>(this.baseURL, {headers: this.headers})
             .toPromise()
-            .then(res => res.data as Pet[])
-            .then(data => data);
+            .then(res => {
+                console.log("Pers service", res)
+                return res.pets as Pet[]
+            })
     }
 
-        getPets2() {
+    getPets2() {
         return this.http.get<any>('assets/demo/data/pet.json')
             .toPromise()
             .then(res => res.data as Pet[])

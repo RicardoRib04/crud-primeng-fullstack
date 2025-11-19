@@ -33,7 +33,10 @@ export class PetComponent implements OnInit {
     constructor(private petService: PetService, private messageService: MessageService) { }
 
     ngOnInit() {
-        this.petService.getPets().then(data => this.pets = data);
+        this.petService.getPets().then(data => {
+            console.log("no compoente", data) 
+            this.pets = data
+        });
         
         this.cols = [
             { field: 'pet', header: 'Pet' },

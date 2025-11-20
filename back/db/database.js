@@ -38,5 +38,48 @@ db.run(`
             breed TEXT
         )
 `)
+console.log('Tabela tutores criada')
+db.run(`
+        CREATE TABLE IF NOT EXISTS tutores (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            contact TEXT,
+            address TEXT,
+            associatedPets TEXT
+        )
+`)
+console.log('Tabela produtos criada')
+db.run(`
+        CREATE TABLE IF NOT EXISTS produtos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            petFood TEXT,
+            toys TEXT,
+            medications TEXT
+        )
+`)
+console.log('Tabela servicos criada')
+db.run(`
+        CREATE TABLE IF NOT EXISTS servicos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            services TEXT,
+            bathing TEXT,
+            grooming TEXT,
+            consultation TEXT,
+            vaccination TEXT
+        )
+`)
+
+console.log('Tabela agendamentos criada')
+db.run(`
+        CREATE TABLE IF NOT EXISTS agendamentos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            owner TEXT,
+            pet TEXT,
+            service TEXT,
+            date TEXT,
+            time TEXT,
+            status TEXT
+        )
+`)
 
 module.exports = db

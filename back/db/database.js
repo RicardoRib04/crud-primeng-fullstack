@@ -52,20 +52,19 @@ console.log('Tabela produtos criada')
 db.run(`
         CREATE TABLE IF NOT EXISTS produtos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            petFood TEXT,
-            toys TEXT,
-            medications TEXT
+            name TEXT,
+            category TEXT,
+            price REAL,
+            description TEXT
         )
 `)
 console.log('Tabela servicos criada')
 db.run(`
         CREATE TABLE IF NOT EXISTS servicos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            services TEXT,
-            bathing TEXT,
-            grooming TEXT,
-            consultation TEXT,
-            vaccination TEXT
+            name TEXT,
+            price REAL,
+            durationTEXT,
         )
 `)
 

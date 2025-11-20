@@ -45,7 +45,7 @@ function deleteAgendamento(id, callback){
 
 function updateAgendamento(id, owner, pet, service, date, time, status,callback){
     db.run(
-        'UPDATE agendamentos SET owner = ?, pet = ?, service = ?, date = ?, time = ?, status =  WHERE id = ?',
+        'UPDATE agendamentos SET owner = ?, pet = ?, service = ?, date = ?, time = ?, status = ? WHERE id = ?',
         [owner, pet, service, date, time, status,id],
         (err)=>{
             if(err){

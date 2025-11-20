@@ -41,15 +41,13 @@ router.get('/:id', function(req, res, next) {
 /* POST servicos API. */
 router.post('/',authenticateToken, function(req, res, next) {
   // aceitar tanto { name } quanto { nameServico } para compatibilidade
-  const services = req.body.services || req.body.nameServico
-  const bathing = req.body.bathing
-  const grooming = req.body.grooming
-  const consultation = req.body.consultation
-  const vaccination = req.body.vaccination
+  const name = req.body.name || req.body.nameServico
+  const description = req.body.description
+  const price = req.body.price
 
-  console.log('veio', { services, bathing, grooming, consultation, vaccination })
+  console.log('veio', { name, description, price})
 
-  createServico(services, bathing, grooming, consultation, vaccination, (err, newServico)=>{
+  createServico(name, description, price,(err, newServico)=>{
     if(err){
       console.error('createServico erro:', err.message)
       return res.status(500).json({error: 'Erro ao salvar servico'})
@@ -74,9 +72,9 @@ router.delete('/:id',authenticateToken, function(req, res){
 
 router.put('/:id',authenticateToken, function(req, res){
   const id = req.params.id
-  const { services, bathing, grooming, consultation, vaccination } = req.body
+  const { name, description, price} = req.body
 
-  updateServico(id, services, bathing, grooming, consultation, vaccination, (err)=>{
+  updateServico(id, name, description, price, (err)=>{
     if(err){
       console.error('updateServico erro:', err.message)
       return res.status(500).json({error: 'Erro ao atualizar servico'})

@@ -1,39 +1,44 @@
 const db = require('../db/database')
 
-// Pegar servico pelo ID
-function findServicoById(id, callback){
-    db.get('SELECT * FROM servicos WHERE id = ?', [id], (err, row)=>{
-        callback(err,row)
+// Pegar serviço pelo ID
+function findServicoById(id, callback) {
+    db.get('SELECT * FROM servicos WHERE id = ?', [id], (err, row) => {
+        callback(err, row)
     })
 }
 
-// Pegar todos os servicos
-function getServicos(callback){
-    db.all('SELECT * FROM servicos', [], (err, rows)=>{
+// Pegar todos os serviços
+function getServicos(callback) {
+    db.all('SELECT * FROM servicos', [], (err, rows) => {
         callback(err, rows)
     })
 }
 
-// Criar um novo servico
-function createServico(services,bathing, grooming, consultation, vaccination, callback){
-    console.log('salvando no banco', services) 
+// Criar um novo serviço
+// Requisito do Professor: Nome, Descrição, Preço
+function createServico(name, description, price, callback) {
+    console.log('salvando no banco', name)
+    
     db.run(
-        'INSERT INTO servicos (services, bathing, grooming, consultation, vaccination) VALUES (?, ?, ?, ?, ?)',[services,bathing, grooming, consultation, vaccination], (err)=>{
-            if(err){
+        'INSERT INTO servicos (name, description, price) VALUES (?, ?, ?)', 
+        [name, description, price], 
+        function(err) {
+            if (err) {
                 console.error('Erro ao inserir servico:', err.message)
                 return callback(err)
             }
 
-            const newServico = { services }
+            // Retorna o objeto com o ID criado
+            const newServico = { id: this.lastID, name, description, price }
             callback(null, newServico)
         }
     )
 }
 
-function deleteServico(id, callback){
+function deleteServico(id, callback) {
     db.run(
-        'DELETE FROM servicos WHERE id = ?',[id], (err)=>{
-            if(err){
+        'DELETE FROM servicos WHERE id = ?', [id], (err) => {
+            if (err) {
                 console.error('Erro ao deletar servico:', err.message)
                 return callback(err)
             }
@@ -43,12 +48,14 @@ function deleteServico(id, callback){
     )
 }
 
-function updateServico(services,bathing, grooming, consultation, vaccination, callback){
+// Atualizar serviço
+// CORREÇÃO: Adicionado 'id' como primeiro argumento
+function updateServico(id, name, description, price, callback) {
     db.run(
-        'UPDATE servicos SET services = ?, bathing = ?, grooming = ?, consultation = ?, vaccination = ?WHERE id = ?',
-        [services,bathing, grooming, consultation, vaccination, id],
-        (err)=>{
-            if(err){
+        'UPDATE servicos SET name = ?, description = ?, price = ? WHERE id = ?',
+        [name, description, price, id],
+        (err) => {
+            if (err) {
                 console.error('Erro ao atualizar servico:', err.message)
                 return callback(err)
             }
@@ -58,4 +65,4 @@ function updateServico(services,bathing, grooming, consultation, vaccination, ca
     )
 }
 
-module.exports = {findServicoById, createServico, getServicos, deleteServico, updateServico}
+module.exports = { findServicoById, createServico, getServicos, deleteServico, updateServico }

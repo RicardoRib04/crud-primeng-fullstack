@@ -42,12 +42,12 @@ router.get('/:id', function(req, res, next) {
 router.post('/',authenticateToken, function(req, res, next) {
   // aceitar tanto { petFood } quanto { nameProduto } para compatibilidade
 
-  const { petFood, toys, medications } = req.body;
+  const { name, description, price, stock } = req.body;
 
-  console.log('veio', { petFood, toys, medications })
+  console.log('veio', { name, description, price, stock })
 
   // Assumindo que createProduto espera esses três argumentos
-  createProduto(petFood, toys, medications, (err, newProduto)=>{
+  createProduto(name, description, price, stock, (err, newProduto)=>{
     if(err){
       console.error('createProduto erro:', err.message)
       return res.status(500).json({error: 'Erro ao salvar produto'})
@@ -72,9 +72,9 @@ router.delete('/:id',authenticateToken, function(req, res){
 
 router.put('/:id',authenticateToken, function(req, res){
   const id = req.params.id
-  const { petFood, toys, medications} = req.body
+  const { name, description, price, stock } = req.body
 
-  updateProduto(id, petFood, toys, medications, (err)=>{
+  updateProduto(id, name, description, price, stock,(err)=>{
     if(err){
       console.error('updateProduto erro:', err.message)
       return res.status(500).json({error: 'Erro ao atualizar produto'})

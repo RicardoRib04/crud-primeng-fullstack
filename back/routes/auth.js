@@ -5,23 +5,28 @@ const {findUserByUsername, createUser} = require('../models/userModel')
 const router = express.Router()
 
 router.post('/register',(req, res)=>{
-    const {username, password} = req.body
+  const {username, password} = req.body
 
-    findUserByUsername(username, async (err, user)=>{
-        if(err){
-            return res.status(500).json({error: 'Erro no banco de dados'})
-        }
-        if(user){
-            return res.status(400).json({message: 'Usuário já existe'})
-        }
-    })
+  if(!username || !password){
+    return res.status(400).json({ message: 'username e password são obrigatórios' })
+  }
 
+  findUserByUsername(username, (err, user)=>{
+    if(err){
+      return res.status(500).json({error: 'Erro no banco de dados'})
+    }
+    if(user){
+      return res.status(400).json({message: 'Usuário já existe'})
+    }
+
+    // cria o usuário somente depois de confirmar que não existe
     createUser(username, password, (err, newUser)=>{
-        if(err){
-            return res.status(500).json({error: 'Erro ao criar usuário'})
-        }
-        res.status(201).json({message: 'Usuário criado com sucesso', user: newUser})
+      if(err){
+        return res.status(500).json({error: 'Erro ao criar usuário', details: err.message})
+      }
+      res.status(201).json({message: 'Usuário criado com sucesso', user: newUser})
     })
+  })
 })
 
 // Login

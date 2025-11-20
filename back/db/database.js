@@ -33,9 +33,12 @@ db.run(`
         CREATE TABLE IF NOT EXISTS pets (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
+            species TEXT,
+            breed TEXT,
+            age INTEGER
             gender TEXT,
             color TEXT,
-            breed TEXT
+            tutorId INTEGER
         )
 `)
 console.log('Tabela tutores criada')
@@ -53,9 +56,10 @@ db.run(`
         CREATE TABLE IF NOT EXISTS produtos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
+            description TEXT,
             category TEXT,
             price REAL,
-            description TEXT
+            stock TEXT
         )
 `)
 console.log('Tabela servicos criada')
@@ -63,8 +67,8 @@ db.run(`
         CREATE TABLE IF NOT EXISTS servicos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
-            price REAL,
-            durationTEXT,
+            description TEXT,
+            price REAL
         )
 `)
 

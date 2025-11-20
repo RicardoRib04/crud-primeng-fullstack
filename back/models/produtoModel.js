@@ -16,12 +16,12 @@ function getProdutos(callback) {
 
 // Criar um novo produto
 // Seguindo o pedido do professor: Nome, Descrição, Preço, Estoque
-function createProduto(name, description, price, stock, callback) {
+function createProduto(name, description, category, price, stock, callback) {
     console.log('salvando no banco', name)
     
     db.run(
-        'INSERT INTO produtos (name, description, price, stock) VALUES (?, ?, ?, ?)', 
-        [name, description, price, stock], 
+        'INSERT INTO produtos (name, description, category, price, stock) VALUES (?, ?, ?, ?)', 
+        [name, description, category, price, stock], 
         function(err) { // Use 'function' aqui para ter acesso ao 'this.lastID'
             if (err) {
                 console.error('Erro ao inserir produto:', err.message)
@@ -29,7 +29,7 @@ function createProduto(name, description, price, stock, callback) {
             }
 
             // Retorna o objeto criado com o ID gerado
-            const newProduto = { id: this.lastID, name, description, price, stock }
+            const newProduto = { id: this.lastID, name, description, category, price, stock }
             callback(null, newProduto)
         }
     )
@@ -50,10 +50,10 @@ function deleteProduto(id, callback) {
 
 // Atualizar produto
 // ATENÇÃO: Adicionei o ID no começo dos argumentos
-function updateProduto(id, name, description, price, stock, callback) {
+function updateProduto(id, name, description, category, price, stock, callback) {
     db.run(
-        'UPDATE produtos SET name = ?, description = ?, price = ?, stock = ? WHERE id = ?',
-        [name, description, price, stock, id],
+        'UPDATE produtos SET name = ?, description = ?, category = ?, price = ?, stock = ? WHERE id = ?',
+        [name, description, category, price, stock, id],
         (err) => {
             if (err) {
                 console.error('Erro ao atualizar produto:', err.message)

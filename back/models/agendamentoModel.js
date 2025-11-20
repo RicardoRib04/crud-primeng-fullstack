@@ -18,7 +18,7 @@ function getAgendamentos(callback){
 function createAgendamento(owner, pet, service, date, time, status,callback){
     console.log('salvando no banco', owner)
     db.run(
-        'INSERT INTO agendamentos (owner, pet, service, date, time, status) VALUES (?, ?, ?, ?)',[owner, pet, service, date, time, status], (err)=>{
+        'INSERT INTO agendamentos (owner, pet, service, date, time, status) VALUES (?, ?, ?, ?, ?, ?)',[owner, pet, service, date, time, status], (err)=>{
             if(err){
                 console.error('Erro ao inserir agendamento:', err.message)
                 return callback(err)

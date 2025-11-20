@@ -18,7 +18,7 @@ function getPets(callback){
 function createPet(name, gender, color, breed, callback){
     console.log('salvando no banco', name)
     db.run(
-        'INSERT INTO pets (name, gender, color, breed) VALUES (?, ?, ?, ?)',[name, gender , color , breed ], (err)=>{
+        'INSERT INTO pets (name, species, breed, age, gender, color, tutorId) VALUES (?, ?, ?, ?)',[name, gender , color , breed ], (err)=>{
             if(err){
                 console.error('Erro ao inserir pet:', err.message)
                 return callback(err)
@@ -43,10 +43,10 @@ function deletePet(id, callback){
     )
 }
 
-function updatePet(id, name, gender, color, breed, callback){
+function updatePet(id, name, species, breed, age, gender, color, tutorId, callback){
     db.run(
-        'UPDATE pets SET name = ?, gender = ?, color = ?, breed = ? WHERE id = ?',
-        [name, gender, color, breed, id],
+        'UPDATE pets SET name = ?, species = ?, breed = ?, age = ?, gender = ?, color = ?, tutorId = ? WHERE id = ?',
+        [name, species, breed, age, gender, color, tutorId, id],
         (err)=>{
             if(err){
                 console.error('Erro ao atualizar pet:', err.message)

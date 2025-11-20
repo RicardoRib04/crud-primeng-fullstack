@@ -35,7 +35,7 @@ db.run(`
             name TEXT,
             species TEXT,
             breed TEXT,
-            age INTEGER
+            age INTEGER,
             gender TEXT,
             color TEXT,
             tutorId INTEGER
@@ -84,5 +84,6 @@ db.run(`
             status TEXT
         )
 `)
+console.log('Tabelas criadas com sucesso')  
 
 module.exports = db
